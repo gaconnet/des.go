@@ -1,6 +1,6 @@
 include $(GOROOT)/src/Make.inc
 
-TARG=mypackage
+TARG=crypto/des
 GOFILES=\
 	block.go\
 	cipher.go\
