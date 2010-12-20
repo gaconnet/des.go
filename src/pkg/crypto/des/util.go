@@ -30,13 +30,20 @@ func generateDESKey(n int) ([]byte, os.Error) {
 			return nil, KeySizeError(r)
 		}
 	}
-	// fix parity
-	for i, b := range key {
+	MakeOddParity(key)
+	return key, nil
+}
+
+// MakeOddParity edits bytes so that each byte has odd parity.
+// For each byte b, if b has even parity, the least significant bit gets
+// toggled.
+
+func MakeOddParity(bytes []byte) {
+	for i, b := range bytes {
 		if even == checkParityByte(b) {
-			key[i] ^= 0x01
+			bytes[i] ^= 0x01
 		}
 	}
-	return key, nil
 }
 
 func checkParityBytes(bytes []byte) (which int, ok bool) {
